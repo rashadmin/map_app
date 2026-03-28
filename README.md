@@ -1,42 +1,40 @@
-# Nigeria Power Infrastructure Map
+# map_app
 
-> Interactive visualization and exploration of Nigeria's power sector assets.
+> An interactive dashboard visualizing Nigeria's power infrastructure, allowing users to explore substations, power plants, and mini-grids by state.
 
 ## 🧠 Overview
 
-This project provides an interactive web application built with Streamlit and Folium for visualizing critical power infrastructure across Nigeria. It allows users to explore the distribution of substations, power plants, and mini-grids, offering a geographical understanding of the country's power sector challenges and opportunities.
+This project provides a web-based interactive map application built with Streamlit and Folium. Its primary purpose is to offer a clear visualization of Nigeria's power infrastructure, including the locations of substations, power plants, and mini-grids. Users can select specific states to filter and view relevant geographical data, aiding in the understanding of power distribution across the country.
 
 ## 🔨 What I Built
 
-The application delivers a dynamic, map-centric view of Nigeria's power landscape. Key features include:
+The application delivers a dynamic and filterable map experience. Key features include:
 
--   An interactive map displaying the geographical locations of power substations, plants, and mini-grids.
--   The ability to filter and zoom into specific Nigerian states, providing a detailed view of infrastructure within selected administrative boundaries.
--   Integration of administrative boundary data for states and Local Government Areas (LGAs) to provide context for the infrastructure.
--   Utility functions for robust geospatial data handling, including conversion of Well-Known Text (WKT) geometries, Coordinate Reference System (CRS) transformations (e.g., UTM to WGS84), and spatial queries to identify points within specific LGAs or states.
+-   **Interactive Map Display:** Powered by Folium, presenting geospatial data on an zoomable and pannable map.
+-   **State-Level Filtering:** Users can select a Nigerian state from a dropdown to focus the map on specific regions.
+-   **Power Infrastructure Overlay:** Visualizes the locations of substations, power plants, and mini-grids within the selected state.
+-   **Geospatial Data Processing:** Backend utilities handle the conversion of Well-Known Text (WKT) geometries, reprojecting Coordinate Reference Systems (CRS) (e.g., UTM to WGS84), and identifying administrative regions (LGAs and states) for given points.
 
 ## 💭 Thought Process
 
-My approach focused on creating an accessible and informative tool for spatial data analysis of Nigeria's power infrastructure. I chose **Streamlit** for its rapid development capabilities, enabling the swift creation of an interactive web dashboard without extensive front-end development.
+I decided to leverage Streamlit for the frontend due to its rapid development capabilities for data applications, allowing for quick creation of an interactive user interface with minimal code. For the mapping component, Folium was chosen for its ability to render interactive Leaflet maps directly within Python, providing a rich user experience for exploring geospatial data. GeoPandas was a natural fit for handling the underlying geospatial vector data, ensuring robust processing and manipulation of shapefiles and other geographical formats.
 
-For the mapping component, **Folium** was the natural choice due to its strong integration with Python and its ability to render highly interactive Leaflet maps. This allowed for seamless display of geospatial data layers and user interaction.
-
-**GeoPandas** was fundamental for all geospatial data manipulation and processing. It provided the necessary tools to handle shapefiles, perform spatial joins, and manage different geometric types. To ensure data accuracy and compatibility, a dedicated utility file (`codes.py`) was created to abstract complex geospatial operations, such as WKT string parsing and critical CRS transformations using `pyproj`. This separation of concerns made `map.py` cleaner and more focused on the Streamlit application logic. Challenges included ensuring accurate geographical alignment across diverse datasets and optimizing spatial queries for performance, especially when dealing with Nigeria's numerous administrative boundaries.
+A key design choice was to structure the application with a dedicated utility file (`codes.py`) for core geospatial operations. This separation of concerns ensures that the mapping logic in `map.py` remains focused on presentation, while `codes.py` handles the complexities of CRS transformations, WKT parsing, and spatial joins against administrative boundaries. This modular approach enhances maintainability and readability. I specifically focused on Nigerian administrative boundaries, assuming the availability of specific local datasets, to provide a tailored solution for the project's scope.
 
 ## 🛠️ Tools & Tech Stack
 
-| Layer          | Technology            |
-|----------------|-----------------------|
-| Language       | Python 3.x            |
-| Web Framework  | Streamlit             |
-| Mapping        | Folium, streamlit-folium |
-| Geospatial     | GeoPandas, Pyproj, Shapely |
-| Data           | Pandas, NumPy         |
+| Layer      | Technology           |
+|------------|----------------------|
+| Language   | Python               |
+| Web App    | Streamlit            |
+| Mapping    | Folium, streamlit-folium |
+| Geospatial | GeoPandas, Pyproj, Shapely |
+| Data       | Pandas, NumPy        |
 
 ## 🚀 Getting Started
 
 ### Prerequisites
--   Python 3.8+ (or a compatible version for the libraries)
+- Python 3.x
 
 ### Installation
 
@@ -45,24 +43,9 @@ git clone https://github.com/rashadmin/map_app.git
 cd map_app
 pip install -r requirements.txt
 ```
-
-*Note: A `requirements.txt` file needs to be created based on the `Tools & Tech Stack` above for these commands to work directly. If not, install each library individually.*
-
-Example `requirements.txt` content:
-```
-streamlit
-streamlit-folium
-folium
-geopandas
-pyproj
-shapely
-pandas
-numpy
-```
+*(Note: A `requirements.txt` file is assumed to be present with all necessary dependencies listed.)*
 
 ### Run
-
-To launch the interactive map application:
 
 ```bash
 streamlit run map.py
@@ -70,18 +53,18 @@ streamlit run map.py
 
 ## 📖 Usage
 
-Once the application is running, your web browser will automatically open to the Streamlit interface.
+After running the application, a web browser window will open displaying the interactive map.
 
-### Interacting with the Map
+### Interactive Map Dashboard
 
--   **State Selection:** Use the dropdown menu on the sidebar to select a specific Nigerian state. The map will automatically filter and zoom to display the power infrastructure within that state.
--   **Map Navigation:** Pan and zoom around the map using standard controls to explore different regions.
--   **Data Layers:** Observe the overlaid markers representing substations, power plants, and mini-grids.
+1.  **Select a State:** Use the dropdown menu on the sidebar to choose a Nigerian state.
+2.  **View Infrastructure:** The map will automatically update to display substations, power plants, and mini-grids within the selected state.
+3.  **Explore:** Zoom in, zoom out, and pan across the map to explore the geographical distribution of power infrastructure.
 
 ## 📚 Resources
 
--   [Streamlit Documentation](https://docs.streamlit.io/) — Build interactive web apps
--   [Folium Documentation](https://python-visualization.github.io/folium/) — Python interactive mapping
+-   [Streamlit Documentation](https://docs.streamlit.io/) — Building web applications with Python
+-   [Folium Documentation](https://python-visualization.github.io/folium/) — Python wrapper for Leaflet.js
 -   [GeoPandas Documentation](https://geopandas.org/en/stable/) — Geospatial data in Python
 -   [Pyproj Documentation](https://pyproj4.github.io/pyproj/stable/) — CRS transformations
 -   [Shapely Documentation](https://shapely.readthedocs.io/en/stable/manual.html) — Manipulation and analysis of geometric objects
